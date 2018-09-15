@@ -48,7 +48,9 @@ module.exports = {
   */
 
   //Checks if user is online based on login/logout timestamps
-  isOnline: (lastLogin, lastLogout) => {return lastLogin > lastLogout},
+  isOnline: (lastLogin, lastLogout) => {
+    return lastLogin > lastLogout ? "Online" : "Offline"
+  },
 
   //Fetches network level based on network exp
   //Huge thanks to @Thorin for creating this method! <3
