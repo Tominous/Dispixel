@@ -1,4 +1,5 @@
 const config = require('../config.json'),
+const moment = require('moment');
 commands = require('./commandInfo.json');
 
 module.exports = {
@@ -82,4 +83,8 @@ module.exports = {
   numberWithCommas: number => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   },
+
+  formatAPITime: timestamp => {
+    return moment(timestamp).format("dddd, MMMM, Do YYYY, h:mm:ss a");
+  }
 }
