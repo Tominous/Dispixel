@@ -1,5 +1,5 @@
 const config = require('../config.json'),
-const moment = require('moment');
+moment = require('moment');
 commands = require('./commandInfo.json');
 
 module.exports = {
