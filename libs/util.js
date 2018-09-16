@@ -1,5 +1,5 @@
 const config = require('../config.json'),
-const moment = require('moment');
+moment = require('moment');
 commands = require('./commandInfo.json');
 
 module.exports = {
@@ -88,5 +88,13 @@ module.exports = {
 
   formatAPITime: timestamp => {
     return moment(timestamp).format("dddd, MMMM, Do YYYY, h:mm:ss a");
+  },
+
+  fontPath: name => {
+    return `${__dirname.replace('libs', `public/assets/fonts/${name}/${name}.fnt`)}`;
+  },
+
+  resourcePath: name => {
+    return `${__dirname.replace('libs', `public/assets/images/${name}.png`)}`;
   }
 }
