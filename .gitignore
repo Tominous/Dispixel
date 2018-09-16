@@ -1,8 +1,9 @@
 # Personal
 /public/assets/images/bg/full
-/libs/hypixel/keys.json
 /libs/hypixel/exampleResponse.json
-config.json
+key.json
+playground.js
+libs/images/
 
 # Logs
 logs

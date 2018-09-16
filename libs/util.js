@@ -1,4 +1,5 @@
 const config = require('../config.json'),
+moment = require('moment');
 commands = require('./commandInfo.json');
 
 module.exports = {
@@ -47,7 +48,9 @@ module.exports = {
   */
 
   //Checks if user is online based on login/logout timestamps
-  isOnline: (lastLogin, lastLogout) => {return lastLogin > lastLogout},
+  isOnline: (lastLogin, lastLogout) => {
+    return lastLogin > lastLogout ? "Online" : "Offline"
+  },
 
   //Fetches network level based on network exp
   //Huge thanks to @Thorin for creating this method! <3
@@ -82,4 +85,16 @@ module.exports = {
   numberWithCommas: number => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   },
+
+  formatAPITime: timestamp => {
+    return moment(timestamp).format("dddd, MMMM, Do YYYY, h:mm:ss a");
+  },
+
+  fontPath: name => {
+    return `${__dirname.replace('libs', `public/assets/fonts/${name}/${name}.fnt`)}`;
+  },
+
+  resourcePath: name => {
+    return `${__dirname.replace('libs', `public/assets/images/${name}.png`)}`;
+  }
 }
