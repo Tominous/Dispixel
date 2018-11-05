@@ -8,5 +8,13 @@ module.exports = {
 	usage: 'leaderboard [game]',
 	execute(message, args) {
 
+			}
+		} else {
+			message.channel.send(new Discord.RichEmbed()
+				.setTitle(`Unknown Game Type: **${args[0]}`)
+				.addField('Available Game Types:', allGames.join(', '))
+				.setThumbnail('#e84118')
+			);
+		}
 	},
 }
