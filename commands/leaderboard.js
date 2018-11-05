@@ -11,6 +11,9 @@ module.exports = {
 	description: 'Fetches leaderboards for a given game.',
 	usage: 'leaderboard [game]',
 	execute(message, args) {
+		if (allGames.indexOf(args[0]) > -1) {
+			// makes sure we actually have the game.
+			if (gameConversion[args[0]] != null) {
 
 			}
 		} else {
