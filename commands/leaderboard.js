@@ -1,5 +1,9 @@
 const Discord = require('discord.js');
 const hypixeljs = require('hypixeljs');
+const fs = require('fs');
+
+const gameConversion = JSON.parse(fs.readFileSync('../lib/gameconversion.json').toString());
+const allGames = Object.keys(gameConversion);
 
 module.exports = {
 	name: 'leaderboard',
