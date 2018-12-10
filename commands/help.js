@@ -1,9 +1,6 @@
 const Discord = require('discord.js');
 const { prefix } = require('../config.json');
-
-function captalise(str) {
-	return str.charAt(0).toUpperCase() + str.substr(1);
-}
+const { capitalize } = require('../lib/dispixelutil');
 
 module.exports = {
 	name: 'help',
@@ -16,34 +13,53 @@ module.exports = {
 		helpEmbed.setColor('#00a8ff');
 		const { commands } = message.client;
 
-		if (!args.length) {
+		if (args.length === 0) {
 			helpEmbed.setTitle('Dispixel Help:');
-			helpEmbed.addField('Here\'s a list of all of the commands available:', commands.map(command => command.name).join(', '))
-			helpEmbed.addField(`You can use ${prefix}help [command] to get information about a specific command.`, `e.g. ${prefix}help ping`);
+			helpEmbed.addField(
+				'Here\'s a list of all of the commands available:',
+				commands.map(command => command.name).join(', ')
+			);
+			helpEmbed.addField(
+				`You can use ${prefix}help [command] to get information about a specific command.`,
+				`e.g. ${prefix}help ping`
+			);
 
-			return message.author.send(helpEmbed)
+			return message.author
+				.send(helpEmbed)
 				.then(() => {
 					if (message.channel.type === 'dm') return;
-					message.reply('I\'ve sent you a DM with all my help message and commands!');
+					message.reply(
+						'I\'ve sent you a DM with all my help message and commands!'
+					);
 				})
 				.catch(error => {
-					console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
+					console.error(
+						`Could not send help DM to ${message.author.tag}.\n`,
+						error
+					);
 					message.reply('it seems like I can\'t DM you!');
 				});
 		}
 
 		const name = args[0].toLowerCase();
-		const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
+		const command =
+			commands.get(name) ||
+			commands.find(c => c.aliases && c.aliases.includes(name));
 
 		if (!command) {
 			return message.reply('that\'s not a valid command!');
 		}
 
-		helpEmbed.setTitle(`${captalise(command.name)} Help`)
+		helpEmbed.setTitle(`${capitalize(command.name)} Help`);
 
-		if (command.aliases) helpEmbed.addField('**Aliases:**', `${command.aliases.join(', ')}`);
-		if (command.description) helpEmbed.addField('**Description:**', `${command.description}`);
-		if (command.usage) helpEmbed.addField('**Usage:**', `${prefix}${command.name} ${command.usage}`);
+		if (command.aliases) {helpEmbed.addField('**Aliases:**', `${command.aliases.join(', ')}`);}
+		if (command.description) {helpEmbed.addField('**Description:**', `${command.description}`);}
+		if (command.usage) {
+			helpEmbed.addField(
+				'**Usage:**',
+				`${prefix}${command.name} ${command.usage}`
+			);
+		}
 
 		helpEmbed.addField('**Cooldown:**', `${command.cooldown || 3} second(s)`);
 
