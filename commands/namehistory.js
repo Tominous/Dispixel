@@ -39,9 +39,9 @@ module.exports = {
 							.setColor('#8c7ae6');
 
 						for (
-							let i = 0;
-							i < (namehistory.length <= 5 ? namehistory.length : 5);
-							i++
+							let i = (namehistory.length <= 5 ? namehistory.length : 5);
+							i >= 0;
+							i--
 						) {
 							if (namehistory[i].changedToAt === undefined) {
 								// the first name registered.
